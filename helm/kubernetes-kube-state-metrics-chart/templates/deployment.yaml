@@ -30,11 +30,6 @@ spec:
           initialDelaySeconds: 5
           timeoutSeconds: 5
         resources:
-          requests:
-            cpu: 50m
-            memory: 75Mi
-          limits:
-            cpu: 50m
-            memory: 75Mi
+{{ toYaml .Values.resources | indent 10 }}
       serviceAccountName: {{ .Values.name }}
       hostNetwork: true
