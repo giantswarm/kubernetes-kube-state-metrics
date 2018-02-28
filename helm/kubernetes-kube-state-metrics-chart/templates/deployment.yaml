@@ -6,7 +6,7 @@ metadata:
   labels:
     app: {{ .Values.name }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicas }}
   template:
     metadata:
       labels:
