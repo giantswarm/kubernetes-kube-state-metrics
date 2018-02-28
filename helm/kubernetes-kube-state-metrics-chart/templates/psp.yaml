@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: PodSecurityPolicy
 metadata:
-  name: kube-state-metrics
+  name: {{ .Values.name }}
 spec:
   allowPrivilegeEscalation: true
   fsGroup:

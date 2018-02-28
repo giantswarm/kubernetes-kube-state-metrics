@@ -1,24 +1,24 @@
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
-  name: kube-state-metrics
+  name: {{ .Values.name }}
   labels:
-    app: kube-state-metrics
+    app: {{ .Values.name }}
 subjects:
 - kind: ServiceAccount
-  name: kube-state-metrics
+  name: {{ .Values.name }}
   namespace: kube-system
 roleRef:
   kind: ClusterRole
-  name: kube-state-metrics
+  name: {{ .Values.name }}
   apiGroup: rbac.authorization.k8s.io
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: kube-state-metrics
+  name: {{ .Values.name }}
   labels:
-    app: kube-state-metrics
+    app: {{ .Values.name }}
 rules:
 - apiGroups:
   - ""
@@ -67,4 +67,4 @@ rules:
   verbs:
   - use
   resourceNames:
-  - kube-state-metrics
+  - {{ .Values.name }}

@@ -1,19 +1,19 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: kube-state-metrics
+  name: {{ .Values.name }}
   namespace: kube-system
   labels:
-    app: kube-state-metrics
+    app: {{ .Values.name }}
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: kube-state-metrics
+        app: {{ .Values.name }}
     spec:
       containers:
-      - name: kube-state-metrics
+      - name: {{ .Values.name }}
         image: quay.io/giantswarm/kube-state-metrics:v1.2.0
         args:
         - '--port=10301'
@@ -36,5 +36,5 @@ spec:
           limits:
             cpu: 50m
             memory: 75Mi
-      serviceAccountName: kube-state-metrics
+      serviceAccountName: {{ .Values.name }}
       hostNetwork: true

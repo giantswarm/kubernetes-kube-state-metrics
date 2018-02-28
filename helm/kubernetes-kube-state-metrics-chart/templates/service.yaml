@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: kube-state-metrics
+  name: {{ .Values.name }}
   namespace: kube-system
   labels:
-    app: kube-state-metrics
+    app: {{ .Values.name }}
   annotations:
     prometheus.io/scrape: "true"
     prometheus.io/scheme: "http"
@@ -12,4 +12,4 @@ spec:
   ports:
   - port: 10301
   selector:
-    app: kube-state-metrics
+    app: {{ .Values.name }}
