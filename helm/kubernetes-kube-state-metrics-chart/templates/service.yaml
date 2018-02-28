@@ -6,7 +6,7 @@ metadata:
   labels:
     app: kube-state-metrics
   annotations:
-    prometheus.io/scrape: 'true'
+    prometheus.io/scrape: "true"
     prometheus.io/scheme: "http"
 spec:
   ports:
