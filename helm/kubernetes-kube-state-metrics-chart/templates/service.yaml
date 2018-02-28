@@ -10,6 +10,6 @@ metadata:
     prometheus.io/scheme: "http"
 spec:
   ports:
-  - port: 10301
+  - port: {{ .Values.port }}
   selector:
     app: {{ .Values.name }}

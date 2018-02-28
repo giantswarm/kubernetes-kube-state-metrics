@@ -16,17 +16,17 @@ spec:
       - name: {{ .Values.name }}
         image: quay.io/giantswarm/kube-state-metrics:v1.2.0
         args:
-        - '--port=10301'
+        - '--port={{ .Values.port }}'
         livenessProbe:
           httpGet:
             path: /
-            port: 10301
+            port: {{ .Values.port }}
           initialDelaySeconds: 5
           timeoutSeconds: 5
         readinessProbe:
           httpGet:
             path: /
-            port: 10301
+            port: {{ .Values.port }}
           initialDelaySeconds: 5
           timeoutSeconds: 5
         resources:
