@@ -1,0 +1,40 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: kube-state-metrics
+  namespace: kube-system
+  labels:
+    app: kube-state-metrics
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: kube-state-metrics
+    spec:
+      containers:
+      - name: kube-state-metrics
+        image: quay.io/giantswarm/kube-state-metrics:v1.2.0
+        args:
+        - '--port=10301'
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 10301
+          initialDelaySeconds: 5
+          timeoutSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 10301
+          initialDelaySeconds: 5
+          timeoutSeconds: 5
+        resources:
+          requests:
+            cpu: 50m
+            memory: 75Mi
+          limits:
+            cpu: 50m
+            memory: 75Mi
+      serviceAccountName: kube-state-metrics
+      hostNetwork: true
