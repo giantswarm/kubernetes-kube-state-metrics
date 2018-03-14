@@ -6,6 +6,8 @@ metadata:
     "helm.sh/hook": test-success
 spec:
   initContainers:
+    # Bash automated testing systen
+    # https://github.com/bats-core/bats-core
     - name: test-framework
       image: dduportal/bats:0.4.0
       command:
