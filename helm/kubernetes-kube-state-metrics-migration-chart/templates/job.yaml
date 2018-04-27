@@ -18,6 +18,7 @@ spec:
             path: config.yaml
           - key: resources.json
             path: resources.json
+      serviceAccountName: {{ .Values.name }}
       containers:
       - name: {{ .Values.name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
