@@ -4,6 +4,7 @@ metadata:
   name: {{ .Values.name }}
   labels:
     app: {{ .Values.name }}
+    giantswarm.io/service-type: "managed"
 subjects:
 - kind: ServiceAccount
   name: {{ .Values.name }}
@@ -19,6 +20,7 @@ metadata:
   name: {{ .Values.name }}
   labels:
     app: {{ .Values.name }}
+    giantswarm.io/service-type: "managed"
 rules:
 - apiGroups:
   - ""
