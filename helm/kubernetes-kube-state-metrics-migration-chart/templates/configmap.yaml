@@ -11,7 +11,7 @@ data:
     service:
       delete:
         resources:
-          resourceFile: "resources.json"
+          resourceFile: "/var/run/{{ .Values.name }}/configmap/resources.json"
       kubernetes:
         address: ''
         inCluster: true
@@ -19,7 +19,6 @@ data:
           caFile: ''
           crtFile: ''
           keyFile: ''
-data:
   resources.json: |
     [
         {
