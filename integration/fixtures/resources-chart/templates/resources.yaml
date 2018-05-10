@@ -31,7 +31,7 @@ metadata:
     app: kube-state-metrics
     kind: legacy
 spec:
-  replicas: 1
+  replicas: 0
   template:
     metadata:
       labels:
