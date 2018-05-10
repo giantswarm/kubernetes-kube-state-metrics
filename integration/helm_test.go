@@ -64,6 +64,11 @@ func TestHelm(t *testing.T) {
 	}
 }
 
+// TestMigration ensures that previously deployed resources are properly removed.
+// It installs a chart with the same resources as kube-state-metrics with
+// appropriate labels so that we can query for them. Then installs the
+// kube-state-metrics chart and checks that the previous resources are removed
+// and the ones for kube-state-metrics are in place.
 func TestMigration(t *testing.T) {
 	// Install legacy resources.
 	err := framework.HelmCmd("install /e2e/fixtures/resources-chart -n resources")
