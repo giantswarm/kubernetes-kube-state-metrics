@@ -14,6 +14,10 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
+const (
+	resourceNamespace = "kube-system"
+)
+
 var (
 	f *framework.Host
 )
@@ -110,7 +114,7 @@ func checkResourcesPresent(labelSelector string) error {
 		return microerror.Mask(err)
 	}
 	if len(d.Items) != 1 {
-		return microerror.Newf("unexpected number of deployments, want 1, got %d", len(ds.Items))
+		return microerror.Newf("unexpected number of deployments, want 1, got %d", len(d.Items))
 	}
 
 	r, err := c.Rbac().Roles(resourceNamespace).List(listOptions)
@@ -155,7 +159,7 @@ func checkResourcesNotPresent(labelSelector string) error {
 	}
 
 	d, err := c.Extensions().Deployments(resourceNamespace).List(listOptions)
-	if err == nil && len(ds.Items) > 0 {
+	if err == nil && len(d.Items) > 0 {
 		return microerror.New("expected error querying for deployments didn't happen")
 	}
 	if !apierrors.IsNotFound(err) {
