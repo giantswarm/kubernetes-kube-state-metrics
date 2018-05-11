@@ -211,8 +211,8 @@ func checkResourcesNotPresent(labelSelector string) error {
 	return nil
 }
 
-// checkDeployment ensures that key properties of the node-exporter daemonset
-// are correct.
+// checkDeployment ensures that key properties of the kube-state-metrics
+// deployment are correct.
 func checkDeployment() error {
 	name := "kube-state-metrics"
 	expectedMatchLabels := map[string]string{
