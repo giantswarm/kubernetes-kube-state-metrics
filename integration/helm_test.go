@@ -226,7 +226,7 @@ func checkDeployment() error {
 	expectedReplicas := 1
 
 	c := f.K8sClient()
-	ds, err := c.Apps().Deployments(resourceNamespace).Get(name)
+	ds, err := c.Apps().Deployments(resourceNamespace).Get(name, metav1.GetOptions{})
 	if apierrors.IsNotFound(err) {
 		return microerror.Newf("could not find daemonset: '%s' %v", name, err)
 	} else if err != nil {
@@ -239,8 +239,8 @@ func checkDeployment() error {
 	}
 
 	// Check selector match labels.
-	if !reflect.DeepEqual(expectedLabels, ds.Spec.Selector.MatchLabels) {
-		return microerror.Newf("expected match labels: %v got: %v", expectedLabels, ds.Spec.Selector.MatchLabels)
+	if !reflect.DeepEqual(expectedMatchLabels, ds.Spec.Selector.MatchLabels) {
+		return microerror.Newf("expected match labels: %v got: %v", expectedMatchLabels, ds.Spec.Selector.MatchLabels)
 	}
 
 	// Check pod labels.
@@ -249,7 +249,7 @@ func checkDeployment() error {
 	}
 
 	// Check replica count.
-	if *ds.Spec.Replicas != expectedReplicas {
+	if *ds.Spec.Replicas != int32(expectedReplicas) {
 		return microerror.Newf("expected replicas: %d got: %d", expectedReplicas, ds.Spec.Replicas)
 	}
 
