@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"reflect"
 	"testing"
 
 	"github.com/giantswarm/e2e-harness/pkg/framework"
@@ -228,7 +229,7 @@ func checkDeployment() error {
 	ds, err := c.Apps().Deployments(resourceNamespace).Get(name)
 	if apierrors.IsNotFound(err) {
 		return microerror.Newf("could not find daemonset: '%s' %v", name, err)
-	else if err != nil {
+	} else if err != nil {
 		return microerror.Newf("unexpected error getting daemonset: %v", err)
 	}
 
