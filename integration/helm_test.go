@@ -58,6 +58,11 @@ func TestHelm(t *testing.T) {
 	}
 	defer framework.HelmCmd("delete test-deploy --purge")
 
+	err := checkDeployment()
+	if err != nil {
+		t.Fatalf("deployment manifest is incorrect: %v", err)
+	}
+
 	err = framework.HelmCmd("test --debug --cleanup test-deploy")
 	if err != nil {
 		t.Errorf("unexpected error during test of the chart: %v", err)
@@ -201,6 +206,50 @@ func checkResourcesNotPresent(labelSelector string) error {
 	}
 	if !apierrors.IsNotFound(err) {
 		return microerror.Mask(err)
+	}
+
+	return nil
+}
+
+// checkDeployment ensures that key properties of the node-exporter daemonset
+// are correct.
+func checkDeployment() error {
+	name := "kube-state-metrics"
+	expectedMatchLabels := map[string]string{
+		"app": "kube-state-metrics",
+	}
+	expectedLabels := map[string]string{
+		"app": "kube-state-metrics",
+		"giantswarm.io/service-type": "managed",
+	}
+	expectedReplicas := 1
+
+	c := f.K8sClient()
+	ds, err := c.Apps().Deployments(resourceNamespace).Get(name)
+	if apierrors.IsNotFound(err) {
+		return microerror.Newf("could not find daemonset: '%s' %v", name, err)
+	else if err != nil {
+		return microerror.Newf("unexpected error getting daemonset: %v", err)
+	}
+
+	// Check daemonset labels.
+	if !reflect.DeepEqual(expectedLabels, ds.ObjectMeta.Labels) {
+		return microerror.Newf("expected labels: %v got: %v", expectedLabels, ds.ObjectMeta.Labels)
+	}
+
+	// Check selector match labels.
+	if !reflect.DeepEqual(expectedLabels, ds.Spec.Selector.MatchLabels) {
+		return microerror.Newf("expected match labels: %v got: %v", expectedLabels, ds.Spec.Selector.MatchLabels)
+	}
+
+	// Check pod labels.
+	if !reflect.DeepEqual(expectedLabels, ds.Spec.Template.ObjectMeta.Labels) {
+		return microerror.Newf("expected pod labels: %v got: %v", expectedLabels, ds.Spec.Template.ObjectMeta.Labels)
+	}
+
+	// Check replica count.
+	if ds.Spec.Replicas != expectedReplicas {
+		return microerror.Newf("expected replicas: %d got: %d", expectedReplicas, ds.Spec.Replicas)
 	}
 
 	return nil
