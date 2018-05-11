@@ -59,7 +59,7 @@ func TestHelm(t *testing.T) {
 	}
 	defer framework.HelmCmd("delete test-deploy --purge")
 
-	err := checkDeployment()
+	err = checkDeployment()
 	if err != nil {
 		t.Fatalf("deployment manifest is incorrect: %v", err)
 	}
@@ -249,7 +249,7 @@ func checkDeployment() error {
 	}
 
 	// Check replica count.
-	if ds.Spec.Replicas != expectedReplicas {
+	if *ds.Spec.Replicas != expectedReplicas {
 		return microerror.Newf("expected replicas: %d got: %d", expectedReplicas, ds.Spec.Replicas)
 	}
 
