@@ -51,6 +51,10 @@ required = [
   name = "github.com/giantswarm/e2esetup"
 
 [[constraint]]
+  branch = "release-tests-flag"
+  name = "github.com/giantswarm/e2etests"
+
+[[constraint]]
   branch = "master"
   name = "github.com/giantswarm/helmclient"
 
