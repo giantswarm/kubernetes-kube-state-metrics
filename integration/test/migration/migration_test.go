@@ -14,7 +14,7 @@ import (
 )
 
 const (
-	resourceNamespace = "kube-system"
+	resourceNamespace = metav1.NamespaceSystem
 )
 
 // TestMigration ensures that previously deployed resources are properly removed.
