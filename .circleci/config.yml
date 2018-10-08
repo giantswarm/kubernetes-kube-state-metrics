@@ -94,9 +94,18 @@ jobs:
         at: .
 
     - run:
+        name: Set branch name
+        command: |
+          ./architect publish --pipeline=false --channels=${CIRCLE_BRANCH}
+          echo 'export BRANCH="$CIRCLE_BRANCH"' >> $BASH_ENV
+
+    - run:
         name: Clean up temporary channel for feature branch deploys
         command: |
-          echo $FEATURE_BRANCH
+          echo shell: $0
+          echo feature_branch: $FEATURE_BRANCH
+          echo feature_branch_braket: ${FEATURE_BRANCH}
+          echo branch: $BRANCH
           ./architect unpublish --channels=$FEATURE_BRANCH
 
 workflows:
