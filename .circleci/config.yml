@@ -95,7 +95,9 @@ jobs:
 
     - run:
         name: Clean up temporary channel for feature branch deploys
-        command: ./architect unpublish --channels=${FEATURE_BRANCH}
+        command: |
+          echo $FEATURE_BRANCH
+          ./architect unpublish --channels=$FEATURE_BRANCH
 
 workflows:
   version: 2
