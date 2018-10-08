@@ -99,6 +99,8 @@ jobs:
         command: |
           ./architect unpublish --channels=$(cat ./feature_branch)
 
+    - run: ./architect publish --stable
+
 workflows:
   version: 2
   build_e2e:
@@ -122,5 +124,8 @@ workflows:
           - e2eTestMigration
 
       - publish_to_stable:
+          filters:
+            branches:
+              only: master
           requires:
-          - build
+          - deploy
