@@ -96,8 +96,7 @@ jobs:
 
     - run:
         name: Clean up temporary channel for feature branch deploys
-        command: |
-          ./architect unpublish --channels=$(cat ./feature_branch)
+        command: ./architect unpublish --channels=$(cat ./feature_branch)
 
     - run: ./architect publish --stable
 
