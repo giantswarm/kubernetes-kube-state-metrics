@@ -52,12 +52,13 @@ jobs:
         name: Publish chart to CNR using a temporary channel for feature branch deploys
         command: |
           ./architect publish --pipeline=false --channels=${CIRCLE_BRANCH}
-          echo 'export FEATURE_BRANCH="$CIRCLE_BRANCH"' >> $BASH_ENV
+          echo $CIRCLE_BRANCH"' > ./feature_branch
 
     - persist_to_workspace:
         root: .
         paths:
         - ./architect
+        - ./feature_branch
 
   e2eTestBasic:
     environment:
@@ -94,19 +95,9 @@ jobs:
         at: .
 
     - run:
-        name: Set branch name
-        command: |
-          ./architect publish --pipeline=false --channels=${CIRCLE_BRANCH}
-          echo 'export BRANCH="$CIRCLE_BRANCH"' >> $BASH_ENV
-
-    - run:
         name: Clean up temporary channel for feature branch deploys
         command: |
-          echo shell: $0
-          echo feature_branch: $FEATURE_BRANCH
-          echo feature_branch_braket: ${FEATURE_BRANCH}
-          echo branch: $BRANCH
-          ./architect unpublish --channels=$FEATURE_BRANCH
+          ./architect unpublish --channels=$(cat ./feature_branch)
 
 workflows:
   version: 2
