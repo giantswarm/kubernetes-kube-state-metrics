@@ -52,7 +52,7 @@ jobs:
         name: Publish chart to CNR using a temporary channel for feature branch deploys
         command: |
           ./architect publish --pipeline=false --channels=${CIRCLE_BRANCH}
-          echo $CIRCLE_BRANCH"' > ./feature_branch
+          echo ${CIRCLE_BRANCH} > ./feature_branch
 
     - persist_to_workspace:
         root: .
