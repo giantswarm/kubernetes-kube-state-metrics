@@ -51,8 +51,7 @@ jobs:
     - run:
         name: Publish chart to CNR using a temporary channel for feature branch deploys
         command: |
-          ./architect publish --pipeline=false --channels=${CIRCLE_BRANCH}
-          echo ${CIRCLE_BRANCH} > ./feature_branch
+          ./architect publish --pipeline=false --channels=wip-${CIRCLE_BRANCH}
 
     - persist_to_workspace:
         root: .
@@ -93,10 +92,6 @@ jobs:
 
     - attach_workspace:
         at: .
-
-    - run:
-        name: Clean up temporary channel for feature branch deploys
-        command: ./architect unpublish --channels=$(cat ./feature_branch)
 
     - run: ./architect publish --stable
 
