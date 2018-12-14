@@ -104,9 +104,8 @@ func init() {
 						Name:      appName,
 						Namespace: metav1.NamespaceSystem,
 						DeploymentLabels: map[string]string{
-							"app": appName,
-							"cluster-autoscaler.kubernetes.io/safe-to-evict": "true",
-							"giantswarm.io/service-type":                     "managed",
+							"app":                        appName,
+							"giantswarm.io/service-type": "managed",
 						},
 						MatchLabels: map[string]string{
 							"app": appName,
