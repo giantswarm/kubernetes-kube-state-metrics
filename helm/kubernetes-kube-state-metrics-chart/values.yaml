@@ -14,6 +14,11 @@ image:
   repository: giantswarm/kube-state-metrics
   tag: v1.5.0
 
+imageResizer:
+  registry: quay.io
+  repository: giantswarm/addon-resizer
+  tag: 1.3.8
+
 test:
   image:
     registry: quay.io
