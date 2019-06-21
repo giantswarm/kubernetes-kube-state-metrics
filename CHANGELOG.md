@@ -18,5 +18,5 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Upgraded to kube state metric [new release 1.6.0](https://github.com/kubernetes/kube-state-metrics/releases/tag/v1.6.0)
 - Tunned the addon resizer for bigger clusters.
 
-[0.3.1]: https://github.com/giantswarm/kubernetes-kube-state-metrics/pull/42
+[0.3.1]: https://github.com/giantswarm/kubernetes-kube-state-metrics/pull/43
 [0.3.0]: https://github.com/giantswarm/kubernetes-kube-state-metrics/pull/40
