@@ -50,6 +50,17 @@ rules:
   - daemonsets
   - deployments
   - replicasets
+- apiGroups:
+  - certificates.k8s.io
+  resources:
+  - certificatesigningrequests
+  verbs:
+  - list
+  - watch
+- apiGroups:
+  - extensions
+  resources:
+  - ingresses
   verbs:
   - list
   - watch
