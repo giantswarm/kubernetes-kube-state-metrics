@@ -50,6 +50,9 @@ rules:
   - daemonsets
   - deployments
   - replicasets
+  verbs:
+  - list
+  - watch
 - apiGroups:
   - certificates.k8s.io
   resources:
