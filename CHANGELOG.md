@@ -9,7 +9,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
-- Add missing extra RBAC resources missing.
+- Add missing RBAC resources to cluster role.
 
 ## [v0.3.1]
 
