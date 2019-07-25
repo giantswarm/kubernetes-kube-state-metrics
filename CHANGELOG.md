@@ -9,7 +9,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
-- Increased memory resources from 300Mi to 350Mi.
+- Increase memory resources from 300Mi to 350Mi.
 
 ## [v0.3.3]
 
