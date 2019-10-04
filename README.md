@@ -1,6 +1,9 @@
 [![CircleCI](https://circleci.com/gh/giantswarm/kubernetes-kube-state-metrics.svg?style=shield&circle-token=1d6a6248b1d64bd698c7b68801a879ecc9e185f8)](https://circleci.com/gh/giantswarm/kubernetes-kube-state-metrics)
 
 # kube-state-metrics Helm Chart
+
+**DEPRECATED** Changes should be made to https://github.com/giantswarm/kube-state-metrics-app.
+
 Helm Chart for kube-state-metrics in Tenant Clusters.
 
 * Installs the [kube-state-metrics agent](https://github.com/kubernetes/kube-state-metrics).
